@@ -1,0 +1,29 @@
+package com.pirvate.store.controller.ex;
+
+/**
+ * Author(作者): Ashen one
+ * Date(时间): 2022/7/23  20:50
+ * Description(说明)):
+ *  文件大小超出异常
+ */
+public class FileSizeException extends FileUploadException{
+    public FileSizeException() {
+        super();
+    }
+
+    public FileSizeException(String message) {
+        super(message);
+    }
+
+    public FileSizeException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public FileSizeException(Throwable cause) {
+        super(cause);
+    }
+
+    protected FileSizeException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+        super(message, cause, enableSuppression, writableStackTrace);
+    }
+}
