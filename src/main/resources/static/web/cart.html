@@ -20,7 +20,7 @@
 		<link rel="stylesheet" type="text/css" href="../css/top.css" />
 		<link rel="stylesheet" type="text/css" href="../css/footer.css" />
 		<link rel="stylesheet" type="text/css" href="../css/cart.css" />
-		<script src="../js/cart.js" type="text/javascript" charset="utf-8"></script>
+<!--		<script src="../js/cart.js" type="text/javascript" charset="utf-8"></script>-->
 	</head>
 
 	<body>
@@ -268,12 +268,52 @@
 		</footer>
 		<!--页脚结束-->
 		<script type="text/javascript">
-			$(function() {
-				//返回链接
-				$(".link-account").click(function() {
-					location.href = "orderConfirm.html";
+			// $(function() {
+			// 	//返回链接
+			// 	$(".link-account").click(function() {
+			// 		location.href = "orderConfirm.html";
+			// 	})
+			// })
+
+			$(document).ready(function (){
+				showCartList();
+			});
+
+			function showCartList(){
+				$("#cart-list").empty();
+				$.ajax({
+					url:"/carts/queryByUid",
+					type:"GET",
+					dataType:"JSON",
+					success:function (json){
+						let list = json.data;
+						console.log(list[0])
+						for (let i=0;i<list.length;i++){
+							let tr= '<tr>\n' +
+									'<td>\n' +
+									'<input name="cid" value="'+list[i].cid+'" type="checkbox" class="ckitem" />\n' +
+									'</td>\n' +
+									'<td><img src="..'+list[i].product.image+'collect.png" class="img-responsive" /></td>\n' +
+									'<td>'+list[i].product.title+'</td>\n' +
+									'<td>¥<span id="goodsPrice'+list[i].cid+'">'+list[i].price+'</span></td>\n' +
+									'<td>\n' +
+									'<input id="price-'+list[i].cid+'" type="button" value="-" class="num-btn" onclick="reduceNum(1)" />\n' +
+									'<input id="goodsCount'+list[i].cid+'" type="text" size="2" readonly="readonly" class="num-text" value="'+list[i].num+'">\n' +
+									'<input id="price+'+list[i].cid+'" class="num-btn" type="button" value="+" onclick="addNum(1)" />\n' +
+									'</td>\n' +
+									'<td><span id="goodsCast'+list[i].cid+'">'+list[i].price * list[i].num+'</span></td>\n' +
+									'<td>\n' +
+									'<input type="button" onclick="delCartItem(this)" class="cart-del btn btn-default btn-xs" value="删除" />\n' +
+									'</td>\n' +
+									'</tr>';
+							$("#cart-list").append(tr);
+						}
+					},
+					error:function (xhr){
+						alert("出现了未知错误！"+xhr.status+"错误信息:"+xhr.message);
+					}
 				})
-			})
+			}
 		</script>
 	</body>
 

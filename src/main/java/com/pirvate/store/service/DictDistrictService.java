@@ -8,6 +8,7 @@ import java.util.List;
  * Author(作者): Ashen one
  * Date(时间): 2022/7/25  15:08
  * Description(说明)):
+ * 省市区接口
  */
 
 public interface DictDistrictService {

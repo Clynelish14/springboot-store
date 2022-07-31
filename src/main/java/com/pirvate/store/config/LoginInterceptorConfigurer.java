@@ -34,6 +34,8 @@ public class LoginInterceptorConfigurer implements WebMvcConfigurer {
         whiteList.add("/users/login");
         whiteList.add("/index.html");
 
+
+
         registry.addInterceptor(new LoginInterceptor())
                 .addPathPatterns("/**") //拦截全部 黑名单
                 .excludePathPatterns(whiteList); //放行部分 白名单
@@ -47,5 +49,6 @@ public class LoginInterceptorConfigurer implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/upload/**")
                 .addResourceLocations("file:E:\\ideaProject\\store\\src\\main\\resources\\static\\upload\\");
+
     }
 }

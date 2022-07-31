@@ -1,6 +1,8 @@
 package com.pirvate.store.controller;
 
 import com.pirvate.store.controller.ex.*;
+import com.pirvate.store.entity.ProductExample;
+import com.pirvate.store.service.ProductService;
 import com.pirvate.store.service.ex.*;
 import com.pirvate.store.util.JsonResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -63,6 +65,9 @@ public class BaseController {
         }else if(e instanceof DeleteException){
             result.setState(2203);
             result.setMessage("删除数据产生未知错误");
+        }else if(e instanceof ProductNotFindException){
+            result.setState(2204);
+            result.setMessage("没找到该商品");
         }
 
 
